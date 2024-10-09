@@ -28,14 +28,12 @@ function App() {
       <Cardsidebar/>
     </Sidebar>
     <ConteudoPrincipal>
-    {
-      artistas.map( artista => )
-    }
-    <div className="bg-red-600 h-[200px] w-[200px] p-4">
-      <div className="bg-cyan-500 h-[50px] mb-16"></div>
-      <div className="bg-cyan-500 h-[50px]"></div>
-    </div>
-
+      {artistas.map((artista) => (
+        <div className="bg-pink-700 h-28 w-28 flex flex-col justify-around items-center">
+          <p>{artista.name}</p>
+          <div className="bg-cyan-300 w-4/5 h-8 border-2 border-black "></div>
+        </div>
+      ))}
     </ConteudoPrincipal>
     </Container>
     </>

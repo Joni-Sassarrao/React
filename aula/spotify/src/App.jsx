@@ -16,6 +16,7 @@ function App() {
     .then(res => res.json())
     .then(data => setArtistas(data))
     .catch(err => console.log(err))
+    .finally(() => console.log('Finalizou a requisição'))
   }, [])
 
   return (
@@ -28,10 +29,12 @@ function App() {
       <Cardsidebar/>
     </Sidebar>
     <ConteudoPrincipal>
-      {artistas.map((artista) => (
+      {artistas
+      .filter(artista => artista.genero.includes("pop"))
+      .map((artista) => (
         <div className="bg-pink-700 h-28 w-28 flex flex-col justify-around items-center">
           <p>{artista.name}</p>
-          <div className="bg-cyan-300 w-4/5 h-8 border-2 border-black "></div>
+          <div className="bg-cyan-300 w-4/5 h-8 border-2 border-black flex justify-center">{artista.genero}</div>
         </div>
       ))}
     </ConteudoPrincipal>

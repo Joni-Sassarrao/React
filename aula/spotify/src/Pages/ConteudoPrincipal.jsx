@@ -19,7 +19,7 @@ export default function ConteudoPrincipal({children}){
       <div className="flex flex-col p-5">
         <SliderCards titulo="Rap">
             {artistas
-            .filter( genero => genero.genres.includes("rap"))
+            .filter( (genero) => genero.genres.includes("rap"))
             .map(artista => (
                 <Card key={artista._id} {...artista}/>
             ))}

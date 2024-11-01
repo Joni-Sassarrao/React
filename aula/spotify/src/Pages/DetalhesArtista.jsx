@@ -5,24 +5,32 @@ export default function DetalhesArtista(){
 
     const {id} = useParams();
     const [artista, setArtista] = useState({});
+    const [error, setError] = useState(null);
 
     useEffect(() =>{
-        const puxarArtista = async () =>{
+        const puxarArtistas = async () =>{
             try{
-                const artista = await fetch(`http://localhost:3000/artistas`);
-                const resposta = await artista.json();
-                setArtista(resposta);
-            } catch(error){
+                 const artistas = await fetch(`http://localhost:3000/artistas/${id}`);
+                 
+                 if (!artistas.ok) {
+                     throw new Error(`HTTP error! status: ${artistas.status}`);
+                 }
+                 
+                 const resposta = await artistas.json();
+                 setArtista(resposta);
+            } catch(error) {
                 console.log("Error fetching data:", error);
+                setError(error.message);
             } finally {
-                console.log("Finalizou a requisição")
+                console.log('Finalizou a requisição')
             }
         }
-    })
+        puxarArtistas();
+     }, [id])
 
     return(
         <div className="w-[20rem] p-10 flex flex-col"> 
-            <h1 className="text-3xl font-bold text-white">{artista.name}awdaw</h1>
+            <h1 className="text-3xl font-bold text-white">{artista.name}</h1>
             <img src={artista.image}/>
         </div>
     )

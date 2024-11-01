@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 
 export default function Card({_id, name, image}){
 
+    const [artistas, setArtistas] = useState([]);
+
+    useEffect(() =>{
+        fetch('http://localhost:3000/artistas')
+        .then(res => res.json())
+        .then(data => setArtistas(data))
+        .catch(err => console.log(err))
+        .finally(() => console.log('Finalizou a requisição'))
+      }, [])
+
     const [randomColor, setRandomColor] = useState('')
     
     useEffect(() => {

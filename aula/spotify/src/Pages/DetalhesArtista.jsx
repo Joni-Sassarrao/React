@@ -4,21 +4,26 @@ import { useEffect, useState } from "react"
 export default function DetalhesArtista(){
 
     const {id} = useParams();
-    
-    const [artistas, setArtistas] = useState({})
+    const [artista, setArtista] = useState({});
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/artistas/${id}`)
-            .then((res) => res.json())
-            .then((data) => setArtistas(data))
-            .catch((err) => console.log(err))
-            .finally(() => console.log("Finalizou a requisição"));
-    }, []);
+    useEffect(() =>{
+        const puxarArtista = async () =>{
+            try{
+                const artista = await fetch(`http://localhost:3000/artistas`);
+                const resposta = await artista.json();
+                setArtista(resposta);
+            } catch(error){
+                console.log("Error fetching data:", error);
+            } finally {
+                console.log("Finalizou a requisição")
+            }
+        }
+    })
 
     return(
-        <div className="w-3/4 px-10 pt-0 gap-y-10 flex flex-col items-center"> 
-            <h1 className="text-3xl font-bold text-white">{artistas.name}</h1>
-            <img className="w-80 h-auto" src={artistas.imagem}/>
+        <div className="w-[20rem] p-10 flex flex-col"> 
+            <h1 className="text-3xl font-bold text-white">{artista.name}awdaw</h1>
+            <img src={artista.image}/>
         </div>
     )
 }

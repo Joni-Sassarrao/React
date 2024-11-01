@@ -4,25 +4,29 @@ import { useEffect, useState } from "react"
 export default function DetalhesArtista(){
 
     const {id} = useParams();
-    const [artista, setArtista] = useState([]);
+    const [artista, setArtista] = useState({});
+    const [error, setError] = useState(null);
 
-    useEffect(() => {
-            const puxarArtista = async () => {
-        try{
-            const artista = await fetch(`http://localhost:3000/artistas/${id}`);
-            const resposta = await artista.json();
-            setArtista(resposta);
+    useEffect(() =>{
+        const puxarArtistas = async () =>{
+            try{
+                 const artistas = await fetch(`http://localhost:3000/artistas/${id}`);
+                 
+                 if (!artistas.ok) {
+                     throw new Error(`HTTP error! status: ${artistas.status}`);
+                 }
+                 
+                 const resposta = await artistas.json();
+                 setArtista(resposta);
+            } catch(error) {
+                console.log("Error fetching data:", error);
+                setError(error.message);
+            } finally {
+                console.log('Finalizou a requisição')
             }
-        catch (error) {
-                console.error('Error fetching data:', error);
         }
-        finally {
-            console.log('Finalizou a requisição')
-        }
-    }
-    puxarArtista();
-
-    },[])
+        puxarArtistas();
+     }, [id])
 
     return(
         <div className="w-[20rem] p-10 flex flex-col"> 

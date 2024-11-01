@@ -5,7 +5,12 @@ import artistas from './models/artista.js';
 import genero from './models/Generos.js';
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: "*",
+        credentials: true
+    }
+), express.json());
 const conexao = await conectaNaDb();
 
 conexao.on('error',(erro) => {

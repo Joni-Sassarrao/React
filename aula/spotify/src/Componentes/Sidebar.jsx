@@ -1,8 +1,12 @@
-export default function Sidebar({ children }){
+import Cardsidebar from "./Cardsidebar"
+
+export default function Sidebar(){
     return(
         <>
-        <div className="flex flex-col bg-cyan-500 h-[747px] w-1/4 justify-evenly items-center"> 
-            {children}
+        <div className="flex flex-col bg-purple-950 w-1/6 justify-evenly items-center"> 
+            <Cardsidebar/>
+            <Cardsidebar/>
+            <Cardsidebar/>
         </div>
         </>
     )

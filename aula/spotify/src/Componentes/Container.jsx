@@ -1,6 +1,6 @@
-export default function Container({ children }){
+export default function Container({children}){
     return(
-        <section className="w-screen flex">
+        <section className="w-screen flex bg-black">
             {children}
         </section>
     )

@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 const artistaSchema = new mongoose.Schema({
     id: {type: mongoose.Schema.Types.ObjectId},
     name: {type: String, required: true},
-    genero: {type: String}
+    genres: {type: String},
+    image: {type: String}
 })
 
-const artista = mongoose.model('artistas', artistaSchema)
+const artistas = mongoose.model('artistas', artistaSchema)
 
-export default artista
+export default artistas

@@ -1,7 +1,8 @@
 import express from 'express'
 import conectaNaDb from './db.js';
 import cors from 'cors'
-import artista from './models/artista.js';
+import artistas from './models/artista.js';
+import genero from './models/Generos.js';
 
 const app = express();
 app.use(cors());
@@ -16,14 +17,23 @@ conexao.once('open', () => {
 })
 
 app.get('/artistas', async (req, res) =>{
-    const listaArtistas = await artista.find({});
+    const listaArtistas = await artistas.find({});
     res.status(200).json(listaArtistas);
 })
 
+app.get('/generos', async (req, res) =>{
+    const listaGeneros = await genero.find({});
+    res.status(200).json(listaGeneros)
+})
+
 app.get('artistas/:id', async (req, res) =>{
-    const artista = await artista.findById(req.params.id);
+    const artista = await artistas.findById(req.params.id);
     res.status(200).json(artista);
 })
+
+app.get('/', (req, res) => {
+    res.send('Olá API!');
+});
 
 app.listen(3000, () =>{
     console.log('Servidor conectado')

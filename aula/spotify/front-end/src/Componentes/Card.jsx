@@ -7,7 +7,7 @@ export default function Card({_id, name, image}){
     const [artistas, setArtistas] = useState([]);
 
     useEffect(() =>{
-        fetch('http://localhost:3000/artistas')
+        fetch('https://react-6j46.vercel.app/artistas')
         .then(res => res.json())
         .then(data => setArtistas(data))
         .catch(err => console.log(err))

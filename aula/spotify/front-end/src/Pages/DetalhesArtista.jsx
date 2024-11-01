@@ -10,7 +10,7 @@ export default function DetalhesArtista(){
     useEffect(() =>{
         const puxarArtistas = async () =>{
             try{
-                 const artistas = await fetch(`http://localhost:3000/artistas/${id}`);
+                 const artistas = await fetch(`https://react-6j46.vercel.app/${id}`);
                  
                  if (!artistas.ok) {
                      throw new Error(`HTTP error! status: ${artistas.status}`);
